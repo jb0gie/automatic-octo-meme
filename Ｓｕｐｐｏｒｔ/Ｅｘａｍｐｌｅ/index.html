@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Component Examples</title>
+
+        
+	<script src="components/SimpleInfoBox.js"></script>
+	<script src="components/SimpleButton.js"></script>
+	<script src="components/SimplePointSlider.js"></script>
+    <script src="components/SimpleSlideMenu/SimpleSlideMenu.js"></script>
+	<script src="components/SimpleMenu.js"></script>
+
+	<style>
+	
+		body{
+			color: #ffffff;
+			font-family: sans-serif;
+			background-color: #000264;
+			margin: 0px;
+		}
+		
+		.buttons2{
+			color: #ffffff;
+			font-family: sans-serif;
+			--simple-button-radius: 8px;
+			--simple-button-color: #0052AA;
+		}
+	
+		#b1a{
+			--simple-button-border: 4px double;
+		}
+		
+		#b1b{
+			color: #4D3700;
+			font-family: sans-serif;
+			--simple-button-radius: 15px;
+			--simple-button-color: #BB7A00;
+			--simple-button-border: 0px none;
+		}
+		
+		info-box{
+			color: #000000;
+			font-family: sans-serif;
+		}
+		
+		#slider1{
+			margin-bottom: 30px;
+		}
+		
+		#slider2{
+			margin-bottom: 60px;
+			--simple-slider-thumb-color: #00C8CB;
+			--simple-slider-thumb-border: 2px solid #BFFFFC;
+			--simple-slider-thumb-radius: 30px;
+			--simple-slider-track-color: #00C8CB;
+			--simple-slider-track-radius: 6px;
+			--simple-slider-track-border: 2px solid #00C8CB;
+		}
+		
+		.container {
+			margin: 40px;
+			display: grid;
+			grid-gap: 40px;
+			grid-template-columns: auto auto 45%;
+			grid-template-rows: auto auto auto auto auto auto;
+		}
+		
+		#slider1{
+			grid-column-start: 1;
+			grid-column-end: 4;
+			grid-row-start: 1;
+			grid-row-end: 2;
+		}
+		
+		#slider2{
+			grid-column-start: 1;
+			grid-column-end: 4;
+			grid-row-start: 2;
+			grid-row-end: 3;
+		}
+		
+		#selected{
+			grid-column-start: 1;
+			grid-column-end: 2;
+			grid-row-start: 3;
+			grid-row-end: 4;
+		}
+		
+		#enabled{
+			grid-column-start: 2;
+			grid-column-end: 3;
+			grid-row-start: 3;
+			grid-row-end: 4;
+		}
+		
+		#disabled{
+			grid-column-start: 3;
+			grid-column-end: 4;
+			grid-row-start: 3;
+			grid-row-end: 4;
+		}
+		
+		#box1{
+			color: #ffffff;
+			--simple-info-box-color: transparent;
+			--simple-info-box-close-color: #ffffff;
+			--simple-info-box-border: 1px dashed #ffffff;
+			--simple-info-box-radius: 6px;
+		}
+		
+		
+		#menu{
+			z-index: 1000;
+			--simple-slide-menu-burger-margin: 40px 0 0 40px;
+			--simple-slide-menu-bg-color: rgba(00,02,100,0.9);
+			--simple-slide-menu-border: 1px solid #0052AA;
+			--simple-slide-menu-title-color: #ffffff;
+			--simple-slide-menu-title-bg-color: rgba(00,02,100, 1);
+			--simple-slide-menu-title-border: 1px solid #0052AA;
+			--simple-button-border: none;
+		}
+		
+	</style>
+    
+</head>
+
+<body>
+
+	<slide-menu id="menu">
+        <h3 slot="title">My Menu</h3>
+        <simple-menu></simple-menu>
+    </slide-menu>
+
+	<div class="container">
+    
+		<div id="slider1">
+			<point-slider id="slider" points = "16" start = "4" end = "8" thumbtext = " units"></point-slider>
+		</div>
+        
+        <div id="slider2">
+			<point-slider id="slider" points = "64" start = "0" end = "100" thumbtext = " gizmos"></point-slider>
+		</div>
+    
+    	<div class="buttons2" style="margin-bottom: 30px">
+			<button-comp class="button" id="selected" state="selected">Selected</button-comp>
+		</div>
+    
+		<div class="buttons2" style="margin-bottom: 30px">
+			<button-comp class="button" id="enabled" state="enabled">Enabled</button-comp>
+		</div>
+    
+		<div class="buttons2" style="margin-bottom: 30px">
+			<button-comp class="button" id="disabled" state="disabled">Disabled</button-comp>
+		</div>
+
+
+    	<div class="buttons1" style="margin-bottom: 30px">
+			<button-comp class="button" id="b1a" state="selected">Click Me</button-comp>
+		</div>
+    
+    	<div class="buttons1" style="margin-bottom: 30px">
+			<button-comp class="button" id="b1b" state="selected">Guess What!</button-comp>
+		</div>
+    
+    	<info-box id="box1"><h4>Hello World</h4>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec suscipit arcu. Nullam convallis sit amet dolor id volutpat. Sed libero sapien, accumsan eu libero id, luctus bibendum felis. Maecenas nec leo tortor. Vestibulum vulputate finibus tortor quis facilisis. Vestibulum erat est, ultrices a consectetur id, tincidunt ut orci. Mauris nec orci ut orci varius viverra. Integer luctus posuere enim, nec mattis lacus porta nec. Ut condimentum lacinia commodo.</info-box>
+        
+	</div>
+
+
+	<script>
+		window.customElements.define('info-box', SimpleInfoBox);
+		window.customElements.define('point-slider', SimplePointSlider);
+		window.customElements.define('button-comp', SimpleButton);
+		window.customElements.define('slide-menu', SimpleSlideMenu);
+		window.customElements.define('simple-menu', SimpleMenu);
+		
+		let smenu = document.querySelector('simple-menu');
+		let itemlist = [["Oranges", ["one a","two a"]], "Apples", "Pears", "Strawberries", "Blackberries", "Bananas", "Raspberries"];
+		
+		smenu.initialise(itemlist);
+		
+		//smenu.addEventListener('menuclick', e => console.log(e.detail.menu));
+		
+	</script>
+    
+    
+</body>
+</html>
